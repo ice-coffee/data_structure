@@ -1,7 +1,10 @@
 import java.util.Random;
 
-public class Mopao {
-
+/**
+ * 排序算法
+ * 冒泡排序、插入排序、选择排序、归并排序、快速排序
+ */
+public class Sort {
     private void bubbleSort(int[] array) {
         if (array.length == 0) {
             return;
@@ -64,7 +67,7 @@ public class Mopao {
     }
 
     public static void main(String[] args) {
-        Mopao mopao = new Mopao();
+        Sort mopao = new Sort();
         Random random = new Random();
         int[] array = new int[100];
 
