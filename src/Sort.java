@@ -5,6 +5,9 @@ import java.util.Random;
  * 冒泡排序、插入排序、选择排序、归并排序、快速排序
  */
 public class Sort {
+    /**
+     * 冒泡排序
+     */
     private void bubbleSort(int[] array) {
         if (array.length == 0) {
             return;
@@ -26,6 +29,9 @@ public class Sort {
         }
     }
 
+    /**
+     * 插入排序
+     */
     private void insertionSort(int[] array) {
         if (array.length == 0) {
             return;
@@ -45,6 +51,9 @@ public class Sort {
         }
     }
 
+    /**
+     * 选择排序
+     */
     private void selectionSort(int[] array) {
         if (array.length  == 0) {
             return;
@@ -66,6 +75,47 @@ public class Sort {
         }
     }
 
+    private void mergeSort(int[] array) {
+        mergeSortc(array, 0, array.length - 1);
+    }
+
+    private void mergeSortc(int[] array, int p, int r) {
+        if (p >= r) {
+            return;
+        }
+
+        int q = (p + r) / 2;
+        mergeSortc(array, p, q);
+        mergeSortc(array, q + 1, r);
+
+        merge(array, p, q, r);
+    }
+
+    private void merge(int[] array, int p, int q, int r) {
+        int i = p, j = q + 1, k = 0;
+        int[] mergeArray = new int[r - p + 1];
+        while (i <= q && j <= r) {
+            if (array[i] <= array[j]) {
+                mergeArray[k++] = array[i++];
+            } else {
+                mergeArray[k++] = array[j++];
+            }
+        }
+
+        int start = i, end = q;
+        if (j <= r) {
+            start = j;
+            end = r;
+        }
+        for (int b = start; b <= end; b++) {
+            mergeArray[k++] = array[b];
+        }
+
+        for (int a = 0; a < mergeArray.length; a++) {
+            array[p + a] = mergeArray[a];
+        }
+    }
+
     public static void main(String[] args) {
         Sort mopao = new Sort();
         Random random = new Random();
@@ -76,7 +126,7 @@ public class Sort {
         }
 
         long time = System.currentTimeMillis();
-        mopao.selectionSort(array);
+        mopao.mergeSort(array);
         for (int a : array) {
             System.out.print(a + ", ");
         }
