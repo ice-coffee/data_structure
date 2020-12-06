@@ -75,10 +75,17 @@ public class Sort {
         }
     }
 
+    /**
+     * 归并排序
+     * @param array
+     */
     private void mergeSort(int[] array) {
         mergeSortc(array, 0, array.length - 1);
     }
 
+    /**
+     * 归并排序 - 递归算法
+     */
     private void mergeSortc(int[] array, int p, int r) {
         if (p >= r) {
             return;
@@ -91,6 +98,9 @@ public class Sort {
         merge(array, p, q, r);
     }
 
+    /**
+     * 归并排序 - 合并算法
+     */
     private void merge(int[] array, int p, int q, int r) {
         int i = p, j = q + 1, k = 0;
         int[] mergeArray = new int[r - p + 1];
@@ -116,6 +126,49 @@ public class Sort {
         }
     }
 
+    /**
+     * 快速排序
+     */
+    private void quickSort(int[] array) {
+        quickSortc(array, 0, array.length - 1);
+    }
+
+    /**
+     * 快速排序 - 递归算法
+     */
+    private void quickSortc(int[] array, int p, int r) {
+        if (p >= r) {
+            return;
+        }
+
+        int q = partition(array, p, r);
+
+        quickSortc(array, p, q - 1);
+        quickSortc(array, q + 1, r);
+    }
+
+    /**
+     * 快速排序 - 中点算法
+     */
+    private int partition(int[] array, int p, int r) {
+        int pivot = array[r];
+        int i = p;
+        for (int j = p; j < r; j++) {
+            if (array[j] < pivot) {
+                int temp = array[i];
+                array[i] = array[j];
+                array[j] = temp;
+                i++;
+            }
+        }
+
+        int temp = array[i];
+        array[i] = array[r];
+        array[r] = temp;
+
+        return i;
+    }
+
     public static void main(String[] args) {
         Sort mopao = new Sort();
         Random random = new Random();
@@ -126,7 +179,7 @@ public class Sort {
         }
 
         long time = System.currentTimeMillis();
-        mopao.mergeSort(array);
+        mopao.quickSort(array);
         for (int a : array) {
             System.out.print(a + ", ");
         }
