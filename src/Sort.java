@@ -169,6 +169,26 @@ public class Sort {
         return i;
     }
 
+    /**
+     * 二分法查找
+     */
+    private int bsearch(int[] array, int val) {
+        int low = 0;
+        int high = array.length - 1;
+
+        while (low < high) {
+            int middle = low + ((high - low) >> 1);
+            if (array[middle] == val) {
+                return middle;
+            } else if (array[middle] < val) {
+                low = middle + 1;
+            } else {
+                high = middle - 1;
+            }
+        }
+        return -1;
+    }
+
     public static void main(String[] args) {
         Sort mopao = new Sort();
         Random random = new Random();
@@ -178,11 +198,13 @@ public class Sort {
             array[i] = random.nextInt(100);
         }
 
-        long time = System.currentTimeMillis();
         mopao.quickSort(array);
         for (int a : array) {
             System.out.print(a + ", ");
         }
-        System.out.println(System.currentTimeMillis() - time);
+        System.out.println();
+
+        int searchResult = mopao.bsearch(array, 72);
+        System.out.println(searchResult);
     }
 }
